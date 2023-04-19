@@ -30,7 +30,7 @@ podTemplate(label: 'docker-build',
         stage('Build'){
             container('docker'){
                 script {
-                    appImage = docker.build("jeonglinux/java-hello-world")
+                    appImage = docker.build("jeonglinux/node-hello-world")
                 }
             }
         }
