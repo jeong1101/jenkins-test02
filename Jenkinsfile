@@ -21,9 +21,9 @@ podTemplate(label: 'docker-build',
         def dockerHubCred = <your_dockerhub_cred>
         def appImage
 
-        stage('Checkout'){
+        stage('Checkout git'){
             container('git'){
-                checkout scm
+                git 'https://github.com/jeong1101/jenkins-test02.git'
             }
         }
 
