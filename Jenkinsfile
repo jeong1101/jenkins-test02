@@ -18,7 +18,7 @@ podTemplate(label: 'docker-build',
   ]
 ) {
     node('docker-build') {
-        def dockerHubCred = dockerhub_cred
+        def dockerHubCred = jeonglinux_dockerhub
         def appImage
 
         stage('Checkout git'){
@@ -49,7 +49,7 @@ podTemplate(label: 'docker-build',
         stage('Push'){
             container('docker'){
                 script {
-                    docker.withRegistry('https://registry.hub.docker.com',dockerhub_cred){ // dockerHubCred
+                    docker.withRegistry('https://registry.hub.docker.com',jeonglinux_dockerhub){ // dockerHubCred
                         appImage.push("${env.BUILD_NUMBER}")
                         appImage.push("latest")
                     }
