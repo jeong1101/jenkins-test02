@@ -1,4 +1,4 @@
-podTemplate(
+podTemplate( label: 'docker-build',
   containers: [
     containerTemplate(
       name: 'git',
@@ -14,7 +14,7 @@ podTemplate(
     ),
   ],
   volumes: [
-    hostPathVolume(mountPath: '/var/run/docker.sock', hostPath: '/var/run/docker.sock'),
+    hostPathVolume(mountPath: '/var/run/docker/metrics.sock', hostPath: '/var/run/docker/metrics.sock'), ///var/run/docker.sock
   ]
 ) {
     node('docker-build') {
@@ -30,7 +30,7 @@ podTemplate(
         stage('Build'){
             container('docker'){
                 script {
-                    appImage = docker.build("jeonglinux/node-hello-world")
+                    appImage = docker.build("jeonglinux/hello-world")
                 }
             }
         }
@@ -39,8 +39,8 @@ podTemplate(
             container('docker'){
                 script {
                     appImage.inside {
-                        sh 'npm install'
-                        sh 'npm test'
+                        sh 'apt install'
+                        sh 'apt test'
                     }
                 }
             }
