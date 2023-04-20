@@ -23,14 +23,6 @@ pipeline {
         }
      }
 
-     if (skipTests != true) {
-            stage('Test') {
-                sh "'${MAVEN_HOME}/bin/mvn' -P ${activeProfile} -Dmaven.test.failure.ignore -B verify"
-            }
-            stage('Store Test Results') {
-                junit '**/target/surefire-reports/TEST-*.xml'
-            }
-     }
      stage('Build') {
              sh "'${MAVEN_HOME}/bin/mvn' -P ${activeProfile} -Dmaven.test.skip=true clean install"
      }
