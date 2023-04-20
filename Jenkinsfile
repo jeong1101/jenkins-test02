@@ -1,61 +1,25 @@
-podTemplate( label: 'docker-build',
-  containers: [
-    containerTemplate(
-      name: 'git',
-      image: 'alpine/git',
-      command: 'cat',
-      ttyEnabled: true
-    ),
-    containerTemplate(
-      name: 'docker',
-      image: 'docker',
-      command: 'cat',
-      ttyEnabled: true
-    ),
-  ],
-  volumes: [
-    hostPathVolume(mountPath: '/var/run/docker/metrics.sock', hostPath: '/var/run/docker/metrics.sock'), ///var/run/docker.sock
-  ]
-) {
-    node('docker-build') {
-        def dockerHubCred = jeonglinux_dockerhub
-        def appImage
+pipeline {
+  agent any
+  tools {
+    maven 'M3'
+  }
 
-        stage('Checkout git'){
-            container('git'){
-                git 'https://github.com/jeong1101/jenkins-test02.git'
-            }
+  stages {
+
+    stage('Checkout Application Git Branch') {
+        steps {
+            git credentialsId: '{Credential ID}',
+                url: 'https://github.com/best-branch/my-app.git',
+                branch: 'develop'
         }
-
-        stage('Build'){
-            container('docker'){
-                script {
-                    appImage = docker.build("jeonglinux/hello-world")
+        post {
+                failure {
+                  echo 'Repository clone failure !'
                 }
-            }
-        }
-
-        stage('Test'){
-            container('docker'){
-                script {
-                    appImage.inside {
-                        sh 'apt install'
-                        sh 'apt test'
-                    }
+                success {
+                  echo 'Repository clone success !'
                 }
-            }
         }
-
-        stage('Push'){
-            container('docker'){
-                script {
-                    docker.withRegistry('https://registry.hub.docker.com',jeonglinux_dockerhub){ // dockerHubCred
-                        appImage.push("${env.BUILD_NUMBER}")
-                        appImage.push("latest")
-                    }
-                }
-            }
-        }
-    }
-
+     }
+  }
 }
