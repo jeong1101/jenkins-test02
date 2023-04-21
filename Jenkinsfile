@@ -1,5 +1,3 @@
-[ JenkinsFile 작성]
-
 pipeline {
   agent any
   environment {
