@@ -1,11 +1,10 @@
 pipeline {
   agent any
-
+  
+  tools{
+    maven 'M3'
+  }
   environment {
-    // mvn 빌드 & jar를 위한 환경 셋팅
-    JAVA_HOME = "tool jdk-11.0.19+7"
-    MAVEN_HOME = "tool maven-3.6.3"
-    
     // 도커를 위한 환경 셋팅
     registry = "hsjeong17859@gmail.com"
     registryCredential = "dockerhub_cred" //jenkins에 따로 설정을 해야함 (manage Credenitals)
