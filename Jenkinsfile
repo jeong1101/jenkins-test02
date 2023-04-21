@@ -38,7 +38,9 @@ pipeline {
 
         // .jar로 만들기
         stage('Archive') {
-            archive '**/target/*.jar'
+          steps{
+                archive '**/target/*.jar'
+            }
         } 
 
         // docker img 빌드
