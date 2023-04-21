@@ -64,8 +64,10 @@ pipeline {
         }
 
         stage('Deploy') { //실패
-            echo "Deploy is not yet implemented"
+            steps{
+                echo "Deploy is not yet implemented"
+            }
         }
-
+    
     }
 }
