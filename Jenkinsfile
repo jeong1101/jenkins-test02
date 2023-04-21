@@ -1,5 +1,3 @@
-[ Jenkins 파일작성2 ]
-
 pipeline {
   agent any
 
