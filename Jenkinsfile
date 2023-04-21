@@ -11,7 +11,7 @@ pipeline {
     // mvn 빌드
     stage('Build') {
       steps {
-        sh 'mvn clean package -Dmaven.test.skip=true clean install'
+        sh 'mvn clean package install'
       }
     }
 
