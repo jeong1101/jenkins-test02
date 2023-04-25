@@ -25,7 +25,8 @@ pipeline {
         steps{
             script{
                withCredentials([string(credentialsId: 'dockerhub-pwd', variable: 'dockerhubpwd')]) {
-               sh 'docker login -u jeonglinux -p ${dockerhubpwd}'
+               //sh 'docker login -u jeonglinux -p ${dockerhubpwd}'
+                 sh 'docker login -u jeonglinux --password-stdin ${dockerhubpwd}'
                 }
                sh 'docker push jeonglinux/my-app'
             }
