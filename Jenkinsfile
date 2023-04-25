@@ -17,7 +17,7 @@ pipeline {
     stage('Build docker image'){
     steps{
         script{
-            sh 'docker build -t jeonglinux/devops-integration .'
+            sh 'docker build -t jeonglinux/my-app .'
             }
         }
     }
@@ -27,7 +27,7 @@ pipeline {
                withCredentials([string(credentialsId: 'dockerhub-pwd', variable: 'dockerhubpwd')]) {
                sh 'docker login -u jeonglinux -p ${dockerhubpwd}'
                 }
-               sh 'docker push jeonglinux/devops-integration'
+               sh 'docker push jeonglinux/my-app'
             }
         }
     }
