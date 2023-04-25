@@ -29,11 +29,11 @@ pipeline {
     stage('Push image to Hub'){
         steps{
             script{
-                  withCredentials('', registryCredential)]) {
-					dockerImage.push()
-					}
+		withCredentials('', registryCredential) {
+			dockerImage.push()
+			}
 
-				}
+	     }
         }
     }
     
