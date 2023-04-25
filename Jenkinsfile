@@ -29,7 +29,7 @@ pipeline {
                   //sh 'echo $MY_PASSWORD | docker login -u jeonglinux --password-stdin'                
                 
                  //sh 'docker login -u jeonglinux --password-stdin'
-                  sh 'docker login -u jeonglinux --password-stdin ${dockerhubpwd}'
+                  sh 'docker login -u jeonglinux -p ${dockerhubpwd}'
                 }
                sh 'docker push jeonglinux/my-app'
             }
