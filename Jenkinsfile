@@ -25,7 +25,7 @@ pipeline {
         steps{
             script{
                //withCredentials([string(credentialsId: 'dockerhub-pwd', variable: 'dockerhubpwd')]) {
-                withCredentials([string(credentialsId: 'jeonglinux', variable: 'dockerhubpwd')]){
+                withCredentials([string(credentialsId: 'jeonglinux_secret', variable: 'dockerhubpwd')]){
                   sh 'echo $MY_PASSWORD | docker login -u jeonglinux --password-stdin ${dockerhubpwd}'                
                 
                  //sh 'docker login -u jeonglinux --password-stdin'
