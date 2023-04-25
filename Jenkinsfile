@@ -14,10 +14,23 @@ pipeline {
         sh 'mvn clean package'
       }
     }
-    stage('Test') {
-      steps {
-        sh 'mvn test'
-      }
+    stage('Build docker image'){
+    steps{
+        script{
+            sh 'docker build -t jeonglinux/devops-integration .'
+            }
+        }
     }
+    stage('Push image to Hub'){
+        steps{
+            script{
+               withCredentials([string(credentialsId: 'dockerhub-pwd', variable: 'dockerhubpwd')]) {
+               sh 'docker login -u jeonglinux -p ${dockerhubpwd}'
+                }
+               sh 'docker push jeonglinux/devops-integration'
+            }
+        }
+    }
+    
   }
 }
