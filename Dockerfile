@@ -1,3 +1,4 @@
-From openjdk:11-jdk-alpine
-COPY my-app2-1.0-SNAPSHOT.jar .
-CMD ["java","-jar", "my-app2-1.0-SNAPSHOT.jar"]
+FROM openjdk:7u111-jdk-alpine
+EXPOSE 8080
+ADD target/my-app2-1.0-SNAPSHOT.jar my-app2-1.0-SNAPSHOT.ja
+ENTRYPOINT ["java","-jar", "my-app2-1.0-SNAPSHOT.jar"]
